@@ -1,6 +1,7 @@
 package iolab;
 
 import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -8,43 +9,30 @@ import java.io.*;
  */
 public class StartUp {
 
-    public static void main(String[] args) {
-//        File data = new File("J" + File.separatorChar + "names.txt");
-//        
-//        BufferedReader in = null;
-//        
-//        try{
-//            new BufferedReader(new FileReader(data));
-//            String line = in.readLine();
-//            while (line != null){
-//		  System.out.println(line);
-//		  line = in.readLine();  
-//	   }
-//        } catch (IOException ioe){
-//            System.out.println("We have issues.");
-//        } finally {
-//            try {
-//                in.close();
-//            } catch (Exception e){}
-//        }
-        FileInputStream in = null;
-        FileOutputStream out = null;
+    public static void main(String[] args) { 
+        FileHandler fh = new FileHandler();
+        Contact c = new Contact();
+        List<Contact> contactList = new ArrayList<Contact>();
         
-        try{
-            in = new FileInputStream("J:/names.txt");
-            int c;
-            
-            while ((c = in.read()) != -1) System.out.println(c);
-        } catch (IOException ioe){
-            System.out.println("Boo!");
-        } finally {
-            try {in.close();}
-            catch (Exception e){}
+        String [] fields = fh.readFile(new File("/names.txt"));
+        for (int i=0;i<fields.length;i++){
+            while (!(fields[i].equals("-----"))){
+                c.setFirstName(fields[i++]);
+                c.setLastName(fields[i++]);
+                c.setAddress(fields[i++]);
+                c.setCity(fields[i++]);
+                c.setState(fields[i++]);
+                c.setZip(fields[i++]);
+                c.setEmail(fields[i++]);
+                c.setPhone(fields[i++]);
+            }
+            contactList.add(c);
         }
-        
+        for (int i = 0;i<contactList.size();i++){
+            System.out.println(contactList.get(i));
+        }  
     }
-        
-    }
+}
     
 
 
