@@ -16,7 +16,7 @@ public class StartUp {
         
         String [] fields = fh.readFile(new File("/names.txt"));
         for (int i=0;i<fields.length;i++){
-            while (!(fields[i].equals("-----"))){
+            if (!(fields[i].equals("-----"))){
                 c.setFirstName(fields[i++]);
                 c.setLastName(fields[i++]);
                 c.setAddress(fields[i++]);
@@ -29,7 +29,15 @@ public class StartUp {
             contactList.add(c);
         }
         for (int i = 0;i<contactList.size();i++){
-            System.out.println(contactList.get(i));
+            System.out.println(contactList.get(i).getFirstName() + " " 
+                    + contactList.get(i).getLastName());
+            System.out.println(contactList.get(i).getAddress());
+            System.out.println(contactList.get(i).getCity() + ", " +
+                    contactList.get(i).getState() + "  " + 
+                    contactList.get(i).getZip());
+            System.out.println(contactList.get(i).getPhone());
+            System.out.println(contactList.get(i).getEmail());
+            System.out.println();
         }  
     }
 }
